@@ -29,6 +29,8 @@ function onSubmitDog(event) {
     return;
   }
 
+  renderDogList();
+
   // RESET THE FORM TO BLANK
   dogName = "";
   dogBreed = "";
@@ -40,8 +42,33 @@ function onSubmitDog(event) {
 
 function renderDogList() {
   let list = document.getElementById("dog_list");
-  // First, clear the whole list.
-  list.innerHTML = "";
+
+  for (eachDog in dataModelDogs) {
+    if (dataModelDogs.name == "") {
+      list.innerHTML = `<li> No dogs! </li>`;
+    } else {
+      list.innerHTML =
+        `<li> Your ${dataModelDogs.breed} dog, ${dataModelDogs.name}, is ` +
+        dataModelDogs.age +
+        ` years old and under our care!`;
+
+      if (dataModelDogs.likesTreats) {
+        list.innerHTML += ` And he/she loves treats! </li>`;
+      } else {
+        list.innerHTML += ` And he/she doesn't like treats so much! </li>`;
+      }
+    }
+    let removeDogButton = document.createElement("button");
+    removeDogButton.classList.add("remove-button");
+    removeDogButton.onclick = function () {
+      removeDog(currentDog);
+    };
+
+    removeDogButton.innerText = "Send dog home.";
+    li.append(removeDogButton);
+  }
+
+  document.body.appendChild(list);
 
   // STEP THREE - Render the dog list
   // If there are no dogs, then render "No Dogs!"
@@ -53,12 +80,10 @@ function renderDogList() {
   // removeDog() with the current dog as an argument.
 }
 
-function removeDog(dog) {
-  // STEP FOUR - Remove the given dog from the data model.
-  // Your Code Here
+function removeDog(currentDog) {
+  dataModelDogs.splice(currentDog, 1);
+  renderDogList();
 }
 
 let button = document.getElementById("submit_button");
-button.onclick = onSubmitDog;
-
-renderDogList();
+button.addEventListener("click", onSubmitDog);
