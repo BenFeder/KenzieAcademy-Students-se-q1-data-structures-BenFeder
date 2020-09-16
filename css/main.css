@@ -37,3 +37,13 @@ ul {
 .remove-button {
   margin-left: 10px;
 }
+
+fieldset {
+  border: dashed black 1px;
+  justify-content: left;
+  text-align: center;
+}
+
+legend {
+  text-align: center;
+}
