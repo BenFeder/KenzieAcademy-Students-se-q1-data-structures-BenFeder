@@ -1,24 +1,41 @@
 // Follow the Instructions on my.kenzie.academy for this assignment.
 // They will give you details on each step.
 
-// STEP ONE - Create your Data Model Here.
+// Create Data Model
 
-let dataModel; // Assign your data model here.
+let dataModelDogs = [
+  { name: "Daisy", breed: "dachshund", age: 2, likesTreats: false },
+  { name: "Lily", breed: "beagle", age: 1, likesTreats: true },
+  { name: "Rover", breed: "golden retriever", age: 4, likesTreats: true },
+];
 
+// call this function when button is clicked
 function onSubmitDog(event) {
+  let dogName = document.getElementById("name_input").value;
+  let dogBreed = document.getElementById("breed_input").value;
+  let dogAge = document.getElementById("age_input").value;
+  let dogTreats = document.getElementById("treats_input").checked;
+
+  newDogObject = new Object({
+    name: `${dogName}`,
+    breed: `${dogBreed}`,
+    age: dogAge,
+    likesTreats: dogTreats,
+  });
+
+  if (dogName && dogBreed && dogAge) {
+    dataModelDogs.push(newDogObject);
+  } else {
+    return;
+  }
+
+  // RESET THE FORM TO BLANK
+  dogName = "";
+  dogBreed = "";
+  dogAge = "";
+  dogTreats = false;
+
   event.preventDefault();
-  // STEP TWO - Add the dog to your data model.
-
-  // Get all of the input fields
-
-  // Grab all the values from the inputs.
-
-  // If they didn't fill out all the fields, don't add the dog.
-  // Just return
-
-  // Then render the list again
-
-  // Finally, Reset the form.
 }
 
 function renderDogList() {
