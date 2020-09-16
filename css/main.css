@@ -10,6 +10,13 @@ input {
   margin-bottom: 20px;
 }
 
+#header {
+  background-image: url("https://cdn.wimmel-napkins.com/F/1/AM/g13312895.jpg");
+  height: 150px;
+  opacity: 0.85;
+  font-weight: bolder;
+}
+
 body {
   text-align: center;
 }
