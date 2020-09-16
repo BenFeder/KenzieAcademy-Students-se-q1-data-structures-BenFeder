@@ -4,9 +4,27 @@
 // Create Data Model
 
 let dataModelDogs = [
-  { name: "Daisy", breed: "dachshund", age: 2, likesTreats: false },
-  { name: "Lily", breed: "beagle", age: 1, likesTreats: true },
-  { name: "Rover", breed: "golden retriever", age: 4, likesTreats: true },
+  {
+    name: "Daisy",
+    breed: "dachshund",
+    age: 2,
+    gender: "female",
+    likesTreats: false,
+  },
+  {
+    name: "Lily",
+    breed: "beagle",
+    age: 1,
+    gender: "female",
+    likesTreats: true,
+  },
+  {
+    name: "Rover",
+    breed: "golden retriever",
+    age: 4,
+    gender: "male",
+    likesTreats: true,
+  },
 ];
 
 // call this function when button is clicked
@@ -14,27 +32,29 @@ function onSubmitDog(event) {
   let dogName = document.getElementById("name_input").value;
   let dogBreed = document.getElementById("breed_input").value;
   let dogAge = document.getElementById("age_input").value;
+  let dogGender = document.getElementsByName("gender_input").value;
   let dogTreats = document.getElementById("treats_input").checked;
 
   newDogObject = new Object({
     name: `${dogName}`,
     breed: `${dogBreed}`,
     age: dogAge,
+    gender: `${dogGender}`,
     likesTreats: dogTreats,
   });
 
-  if (dogName && dogBreed && dogAge) {
+  if (dogName && dogBreed && dogAge && dogGender) {
     dataModelDogs.push(newDogObject);
+    renderDogList();
   } else {
     return;
   }
-
-  renderDogList();
 
   // RESET THE FORM TO BLANK
   dogName = "";
   dogBreed = "";
   dogAge = "";
+  dogGender = "";
   dogTreats = false;
 
   event.preventDefault();
@@ -48,16 +68,24 @@ function renderDogList() {
       list.innerHTML = `<li> No dogs! </li>`;
     } else {
       list.innerHTML =
-        `<li> Your ${dataModelDogs.breed} dog, ${dataModelDogs.name}, is ` +
+        `<li> Your ${dataModelDogs.breed} ${dataModelDogs.gender} dog, ${dataModelDogs.name}, is ` +
         dataModelDogs.age +
         ` years old and under our care!`;
 
-      if (dataModelDogs.likesTreats) {
-        list.innerHTML += ` And he/she loves treats! </li>`;
-      } else {
-        list.innerHTML += ` And he/she doesn't like treats so much! </li>`;
+      if (dataModelDogs.likesTreats && dataModelDogs.gender == "male") {
+        list.innerHTML += ` And he loves treats! </li>`;
+      } else if (
+        dataModelDogs.likesTreats &&
+        dataModelDogs.gender == "female"
+      ) {
+        list.innerHTML += ` And she loves treats! </li>`;
+      } else if (dataModelDogs.gender == "male") {
+        list.innerHTML += ` And he doesn't like treats so much! </li>`;
+      } else if (dataModelDogs.gender == "female") {
+        list.innerHTML += ` And she doesn't like treats so much! </li>`;
       }
     }
+
     let removeDogButton = document.createElement("button");
     removeDogButton.classList.add("remove-button");
     removeDogButton.onclick = function () {
@@ -80,6 +108,7 @@ function renderDogList() {
   // removeDog() with the current dog as an argument.
 }
 
+// to remove a dog from the list of dogs
 function removeDog(currentDog) {
   dataModelDogs.splice(currentDog, 1);
   renderDogList();
