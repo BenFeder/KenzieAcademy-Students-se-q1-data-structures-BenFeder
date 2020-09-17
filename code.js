@@ -1,6 +1,3 @@
-// Follow the Instructions on my.kenzie.academy for this assignment.
-// They will give you details on each step.
-
 // Create Data Model
 
 let dataModelDogs = [
