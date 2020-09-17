@@ -15,6 +15,7 @@ input {
   height: 150px;
   opacity: 0.85;
   font-weight: bolder;
+  margin-bottom: 10px;
 }
 
 body {
@@ -48,6 +49,7 @@ ul {
 fieldset {
   border: dashed black 1px;
   justify-content: left;
+  padding: 0px;
   text-align: center;
 }
 
